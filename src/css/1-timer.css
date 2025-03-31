@@ -29,14 +29,30 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 16px;
-
   letter-spacing: 0.04em;
-  color: #989898;
+
+  color: #ffffff;
+  background-color: #cfcfcf;
 
   width: 75px;
   height: 37px;
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
 
+  cursor: default;
+}
+
+.start-active {
+  background-color: #4e75ff;
   cursor: pointer;
+
+  transform: background-color;
+  transition: background-color 250ms linear;
+}
+
+.start-active:hover {
+  background-color: #6c8cff;
 }
 
 .timer {

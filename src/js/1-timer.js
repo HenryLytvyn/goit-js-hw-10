@@ -1,9 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-// Описаний у документації
 import iziToast from 'izitoast';
-// Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
 
 const startBtn = document.querySelector('button[data-start]');
@@ -11,7 +9,6 @@ const inputCalendar = document.querySelector('#datetime-picker');
 const timerContainer = document.querySelector('.timer');
 
 startBtn.disabled = true;
-startBtn.style.cursor = 'default';
 
 let date;
 let deltaTime;
@@ -25,19 +22,17 @@ flatpickr('#datetime-picker', {
     if (selectedDates[0] > Date.now()) {
       date = selectedDates[0];
       startBtn.disabled = false;
-      startBtn.style.cursor = 'pointer';
+      startBtn.classList.add('start-active');
     } else {
       iziToast.show({
         title: 'Error',
         message: 'Please choose a date in the future',
         backgroundColor: '#B51B1B',
         image: '../img/error.svg',
-        // imageWidth: '24',
         timeout: '3000',
       });
-      // alert('Please choose a date in the future');
       startBtn.disabled = true;
-      startBtn.style.cursor = 'default';
+      startBtn.classList.remove('start-active');
     }
 
     if (date) {
@@ -49,8 +44,8 @@ flatpickr('#datetime-picker', {
 startBtn.addEventListener('click', handleCountdown);
 
 function handleCountdown() {
-  startBtn.style.cursor = 'default';
   inputCalendar.style.cursor = 'default';
+  startBtn.classList.remove('start-active');
 
   const countdownInterval = setInterval(() => {
     if (deltaTime > 999) {
@@ -59,7 +54,7 @@ function handleCountdown() {
 
       deltaTime -= 1000;
       const currentValue = convertMs(deltaTime);
-      console.log(currentValue);
+      // console.log(currentValue);
 
       timerContainer.innerHTML = `<div class="field">
   <span class="value" data-days>${String(currentValue.days).padStart(
@@ -90,10 +85,8 @@ function handleCountdown() {
   <span class="label">Seconds</span>
 </div>`;
     } else {
-      startBtn.disabled = false;
       inputCalendar.disabled = false;
 
-      startBtn.style.cursor = 'pointer';
       inputCalendar.style.cursor = 'pointer';
 
       clearInterval(countdownInterval);
