@@ -27,7 +27,7 @@ flatpickr('#datetime-picker', {
         title: 'Error',
         message: 'Please choose a date in the future',
         backgroundColor: '#B51B1B',
-        iconUrl: '../img/error.svg',
+        iconUrl: './img/error.svg',
         timeout: '3000',
       });
       startBtn.disabled = true;
