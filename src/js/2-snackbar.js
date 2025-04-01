@@ -34,7 +34,7 @@ function handleSubmit(event) {
     messageColor: '#ffffff',
     backgroundColor: '#59a10d',
     position: 'bottomCenter',
-    iconUrl: '../public/ok.svg',
+    iconUrl: '/img/ok.svg',
   };
   const error = {
     title: 'Error',
@@ -42,7 +42,7 @@ function handleSubmit(event) {
     messageColor: '#ffffff',
     backgroundColor: '#ef4040',
     position: 'bottomCenter',
-    iconUrl: '../public/error.svg',
+    iconUrl: '/img/error.svg',
   };
 
   promise
