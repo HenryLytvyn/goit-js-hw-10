@@ -52,7 +52,7 @@ function handleCountdown() {
   const seconds = document.querySelector('.value[data-seconds]');
 
   const countdownInterval = setInterval(() => {
-    if (deltaTime > 990) {
+    if (deltaTime > 997) {
       startBtn.disabled = true;
       inputCalendar.disabled = true;
 
