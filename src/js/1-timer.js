@@ -6,7 +6,6 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const startBtn = document.querySelector('button[data-start]');
 const inputCalendar = document.querySelector('#datetime-picker');
-const timerContainer = document.querySelector('.timer');
 
 startBtn.disabled = true;
 
@@ -28,7 +27,7 @@ flatpickr('#datetime-picker', {
         title: 'Error',
         message: 'Please choose a date in the future',
         backgroundColor: '#B51B1B',
-        image: '../img/error.svg',
+        iconUrl: '../img/error.svg',
         timeout: '3000',
       });
       startBtn.disabled = true;
@@ -47,49 +46,29 @@ function handleCountdown() {
   inputCalendar.style.cursor = 'default';
   startBtn.classList.remove('start-active');
 
+  const days = document.querySelector('.value[data-days]');
+  const hours = document.querySelector('.value[data-hours]');
+  const minutes = document.querySelector('.value[data-minutes]');
+  const seconds = document.querySelector('.value[data-seconds]');
+
   const countdownInterval = setInterval(() => {
-    if (deltaTime > 999) {
+    if (deltaTime > 990) {
       startBtn.disabled = true;
       inputCalendar.disabled = true;
 
-      deltaTime -= 1000;
+      deltaTime = date.getTime() - Date.now();
       const currentValue = convertMs(deltaTime);
-      // console.log(currentValue);
 
-      timerContainer.innerHTML = `<div class="field">
-  <span class="value" data-days>${String(currentValue.days).padStart(
-    2,
-    '0'
-  )}</span>
-  <span class="label">Days</span>
-</div>
-<div class="field">
-  <span class="value" data-hours>${String(currentValue.hours).padStart(
-    2,
-    '0'
-  )}</span>
-  <span class="label">Hours</span>
-</div>
-<div class="field">
-  <span class="value" data-minutes>${String(currentValue.minutes).padStart(
-    2,
-    '0'
-  )}</span>
-  <span class="label">Minutes</span>
-</div>
-<div class="field">
-  <span class="value" data-seconds>${String(currentValue.seconds).padStart(
-    2,
-    '0'
-  )}</span>
-  <span class="label">Seconds</span>
-</div>`;
+      days.innerHTML = `${String(currentValue.days).padStart(2, '0')}`;
+      hours.innerHTML = `${String(currentValue.hours).padStart(2, '0')}`;
+      minutes.innerHTML = `${String(currentValue.minutes).padStart(2, '0')}`;
+      seconds.innerHTML = `${String(currentValue.seconds).padStart(2, '0')}`;
     } else {
       inputCalendar.disabled = false;
-
       inputCalendar.style.cursor = 'pointer';
 
       clearInterval(countdownInterval);
+      return;
     }
   }, 1000);
 }
